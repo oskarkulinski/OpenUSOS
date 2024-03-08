@@ -13,7 +13,7 @@ An open source USOS mobile app, made for Software Engineering course 2023/2024.
 -calendar,  
 -class groups.  
 ### Could have:  
--registration for courses,
+-registration for courses,  
 -support for other Universities,  
 -surveys.  
 ### Won't have:
