@@ -1,17 +1,19 @@
 import usosapi
+import flet as ft
 
 # USOS API Base URL, trailing slash included.
-Usosapi_base_url = 'https://apps.usos.uj.edu.pl/'
+USOS_API_BASE_URL = 'https://apps.usos.uj.edu.pl/'
 
 # Consumer Key to use.
-Consumer_key = '748apdbMm3Ggh6KGXMyp'
-Consumer_secret = 'Y33JYY3vgjNym6aFP5qnxcMtE7WrejLt8VDjWS87'
+CONSUMER_KEY = '748apdbMm3Ggh6KGXMyp'
+CONSUMER_SECRET = 'Y33JYY3vgjNym6aFP5qnxcMtE7WrejLt8VDjWS87'
 
-# We use usosapi.py in order to do EVERYTHING much easier:
+# We use usosapi package in order to do EVERYTHING much easier:
 
-# We create connection object (We will be using that to call requests): 
+# We create connection object (We will be using that to call requests):
 # Valid consumer_key and consumer_secret is needed for that:
-Main = usosapi.USOSAPIConnection(Usosapi_base_url, Consumer_key, Consumer_secret)
+Main = usosapi.USOSAPIConnection(USOS_API_BASE_URL, CONSUMER_KEY, CONSUMER_SECRET)
+
 
 def Send_an_email():
     Subject = input('Input the subject for your message: ')
@@ -25,7 +27,7 @@ def Send_an_email():
     # We update (create) recepient:
     Main.get('services/mailclient/update_recipients_group', message_id=Message_id["message_id"], emails=Recepient_list)
     # Then we refresh them:
-    Main.get('services/mailclient/refresh_recipients', message_id=Message_id["message_id"] )
+    Main.get('services/mailclient/refresh_recipients', message_id=Message_id["message_id"])
 
     # Finally, we send the message:
 
@@ -34,7 +36,7 @@ def Send_an_email():
 
 
 
-# Some function to choose what user wants
+#  Some function to choose what user wants
 def Choose_What_To_Do():
     print("Welcome to SUS!")
     print("")
@@ -56,26 +58,31 @@ def Choose_What_To_Do():
 # 'Main' here
 #--------------------------------------------------------------------------------------------
 
-# Test  to check if connection is valid:
-print(Main.test_connection())
+def main(page: ft.Page):
 
-# User has to visit using some internet browser to obtain a PIN code required for authorization.
-# IDK, you do frontend lul
-AuthURL = Main.get_authorization_url()
-print(AuthURL) # Pass it to user somehow
-PIN = input('What is the PIN code? ')
-PIN.replace(" ", "")
-# Authorization:
-Main.authorize_with_pin(PIN)
-# test: return users firstname, lastname, id:
-lalala = Main.current_identity()
-print(lalala)
-# Access token, can be used to continue a session:
-Access = Main.get_access_data()
-print(Access) # We should probably save it, so that user doesn't have to log in all the time.
+    # Test  to check if connection is valid:
+    print(Main.test_connection())
 
-# Now, do stuff:
-Choose_What_To_Do()
+    # User has to visit using some internet browser to obtain a PIN code required for authorization.
+    # IDK, you do frontend lul
+    AuthURL = Main.get_authorization_url()
+    print(AuthURL)  # Pass it to user somehow
+    PIN = input('What is the PIN code? ')
+    PIN.replace(" ", "")
+    # Authorization:
+    Main.authorize_with_pin(PIN)
+    # test: return users firstname, lastname, id:
+    lalala = Main.current_identity()
+    print(lalala)
+    # Access token, can be used to continue a session:
+    Access = Main.get_access_data()
+    print(Access)  # We should probably save it, so that user doesn't have to log in all the time.
 
-# Logging out:
-Main.logout()
+    # Now, do stuff:
+    Choose_What_To_Do()
+
+    # Logging out:
+    Main.logout()
+
+
+ft.app(target=main)
