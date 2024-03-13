@@ -6,15 +6,21 @@ An open source USOS mobile app, made for Software Engineering course 2023/2024.
 -working app for Jagiellonian University,  
 -email sending and sent history,    
 -class schedule,  
--notifications for upcoming classes.  
-### Should have:  
--grades,  
+-grades,   
 -tests,  
--calendar,  
--class groups.  
+-notifications for upcoming classes.  
+### Should have:   
+-calendar, 
+-university news,   
+-notifications about registrations,   
+-surveys.  
 ### Could have:  
 -registration for courses,  
--support for other Universities,  
--surveys.  
+-class groups,   
+-information about other courses and students,   
+-support for other Universities.   
 ### Won't have:
--map.
+-map,  
+-reading mail,  
+-student ID card viewing,  
+-viewing personal data.   
